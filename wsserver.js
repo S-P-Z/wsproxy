@@ -11,13 +11,12 @@ let wss = new WebSocketServer({ server: server }, function(stream) {
 	stream.on('error', (err) => {
 		console.error(err);
 	});
-	
+
 	stream.once('data', dataHandler.bind(stream));
 });
 
 let dataHandler = function(data) {
 	let sock = this;
-	console.log('dataHandler', dataHandler);
 	const version = parseInt(data[0],10);
 	if (version != 5) {
 		sock.destroyed || sock.destory()
